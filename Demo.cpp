@@ -23,13 +23,13 @@ int main() {
     Cowboy *tom = new Cowboy("Tom", a);
     OldNinja *sushi = new OldNinja("sushi", b);
     tom->shoot(sushi);
-    cout << tom->print() <<endl;
+   //  cout << tom->print() <<endl;
 
     sushi->move(tom);
     sushi->slash(tom);
 
     Team team_A(tom); 
-    team_A.add(new YountNinja("Yogi", Point(64,57)));
+    team_A.add(new YoungNinja("Yogi", Point(64,57)));
 
     // Team b(tom); should throw tom is already in team a
 

@@ -12,17 +12,19 @@ namespace ariel{
 
         public:
 
+            Point();
+
             Point(double point_x, double point_y);
 
-            double getPointX();
+            double getPointX() const;
 
-            double getPointY();
+            double getPointY() const;
 
-            double distance(Point point);
+            double distance(const Point& point) const;
 
-            void print_point();
+            void print_point() const;
 
-            Point moveTowards(Point source, Point destanation, double distance);
+            Point moveTowards(Point& source, const Point& destanation, double distance);
 
     };
 }      
