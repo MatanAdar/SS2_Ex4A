@@ -9,7 +9,18 @@
 namespace ariel{
 
     Team::Team(Character* leader) : team_leader(leader) {
+
+        //checking if player is already in any team
+        if(leader->getInTeam() != "no"){
+            throw std::runtime_error(leader->getName() +" is already in a team");
+        }
         
+        // if(checking_player_in_team_already(leader) == true){
+        //     throw std::runtime_error(leader->getName() +" is already in the team");
+        // }
+
+        team.push_back(leader);
+        leader->setInTeam("yes");
 
     }
 
@@ -17,6 +28,7 @@ namespace ariel{
 
         if(team.size() < 10){
             team.push_back(player);
+            player->setInTeam("yes");
         }
         else{
             throw std::runtime_error("Team is Max capacity!");
@@ -29,11 +41,30 @@ namespace ariel{
     }
 
     int Team::stillAlive() const{
+        
+        int count = 0;
+        for(size_t i=0; i<team.size(); i++){
+            if(team[i]->isAlive() == true){
+                count++;
+            }
+        }
 
-        return 1;
+        return count;
     }
             
     void Team::print() const{
+
+    }
+
+    bool Team::checking_player_in_team_already(Character* player){
+
+        for(size_t i=0; i<team.size(); i++){
+            if(team[i] == player){
+                return true;
+            }
+        }
+
+        return false;
 
     }
 

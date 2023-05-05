@@ -18,6 +18,8 @@ namespace ariel{
 
             string c_name;
 
+            string checking_in_team;
+
         public:
 
             Character(const string& name,const Point& location , int health);
@@ -38,7 +40,17 @@ namespace ariel{
                 return c_location;
             }
 
-            void print();
+            const string& getInTeam() const{
+
+                return checking_in_team;
+            }
+
+            void setInTeam(string temp){
+
+                checking_in_team = temp;
+            }
+
+            void print() const;
 
 
     };

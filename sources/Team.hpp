@@ -36,7 +36,10 @@ namespace ariel{
             
             void print() const;
 
+            bool checking_player_in_team_already(Character* player);
+
             // ~Team();
+
 
 
     };
