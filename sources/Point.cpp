@@ -34,7 +34,12 @@ namespace ariel{
         double dis_x = this->getPointX() - other_point.getPointX();
         double dis_y = this->getPointY() - other_point.getPointY();
 
-        return sqrt((dis_x*dis_x) + (dis_y*dis_y));
+        double pow_x = dis_x*dis_x;
+        double pow_y = dis_y*dis_y;
+
+        return sqrt(pow_x + pow_y);
+
+        // return sqrt((dis_x*dis_x) + (dis_y*dis_y));
     }
 
     void Point::print_point() const{
@@ -42,7 +47,7 @@ namespace ariel{
         cout << "(" << this->getPointX() << "," << this->getPointY() << ")" << endl;
     }
 
-    Point Point::moveTowards(Point& source, const Point& destanation, double distance){
+    Point Point::moveTowards(const Point& destanation, double distance){
 
         return Point(1.0,1.0);
     }

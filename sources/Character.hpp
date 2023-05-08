@@ -18,7 +18,7 @@ namespace ariel{
 
             string c_name;
 
-            string checking_in_team;
+            bool checking_in_team = false;
 
         public:
 
@@ -40,17 +40,22 @@ namespace ariel{
                 return c_location;
             }
 
-            const string& getInTeam() const{
+            int getHealth() const{
+                return c_health;
+            }
+
+            bool getInTeam() const{
 
                 return checking_in_team;
             }
 
-            void setInTeam(string temp){
+            void setInTeam(bool temp){
 
                 checking_in_team = temp;
             }
-
-            void print() const;
+            
+            //need to check if need the word virtual before ??????????????????????????
+            string print() const;
 
 
     };

@@ -24,7 +24,7 @@ namespace ariel{
 
             void print_point() const;
 
-            Point moveTowards(Point& source, const Point& destanation, double distance);
+            Point moveTowards(const Point& destanation, double distance);
 
     };
 }      

@@ -8,11 +8,11 @@ using namespace std;
 namespace ariel{
 
     Character::Character(const string& name,const Point& location , int health) : c_name(name), c_location(location), c_health(health) {
-        checking_in_team = "no";
+        
     }
 
     Character::Character(const string& name,const Point& location) : c_name(name) , c_location(location){
-        checking_in_team = "no";
+        
     }
 
     bool Character::isAlive() const{
@@ -33,9 +33,9 @@ namespace ariel{
     }
 
     //need to check if need the word virtual before ??????????????????????????
-    void Character::print() const{
+    string Character::print() const{
 
-        cout << "hii" << endl;
+        return "hii";
     }
 
 

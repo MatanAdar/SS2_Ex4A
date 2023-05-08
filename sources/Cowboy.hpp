@@ -14,7 +14,7 @@ namespace ariel{
 
         public:
 
-            Cowboy(const string& name, const Point& location, int health);
+            // Cowboy(const string& name, const Point& location, int health);
 
             Cowboy(const string& name, const Point& location);
 

@@ -38,8 +38,30 @@ namespace ariel{
 
             bool checking_player_in_team_already(Character* player);
 
-            // ~Team();
+            //destructor
+            ~Team();
 
+            Team(const Team& other) : team_leader(other.team_leader){
+            // Copy the state of the `other` object
+            // to the new `Team` object
+            // ...
+            }
+
+            // Copy assignment operator
+            Team& operator=(const Team& other) {
+                if (this != &other) {
+                    // Copy the state of the `other` object
+                    // to the current object
+                    // ...
+                }
+                return *this;
+            }
+
+            // Move constructor
+            Team(Team&& other) = default;
+
+            // Move assignment operator
+            Team& operator=(Team&& other) = default;
 
 
     };
