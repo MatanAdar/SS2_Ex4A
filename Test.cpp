@@ -117,7 +117,7 @@ TEST_CASE("Checking Shoot function"){
     CHECK(enemy.isAlive() == false);
 
     //try to shoot when dont have any bullets left
-    a.shoot(&temp);
+    CHECK_THROWS(a.shoot(&temp));
 
     //checking temp dont lose life because cowboy dont have anymore bullets
     CHECK(temp.getHealth() == 100);
@@ -172,9 +172,58 @@ TEST_CASE("Checking cowboy relod function"){
 
 //     Team b(&a);
 
-//     CHECK_THROWS(Team(&a));v
+//     CHECK_THROWS(Team(&a));
 // }
 
+
+// TEST_CASE("Checking Move function"){
+
+//     YoungNinja a("Matan" , Point(1,1));
+
+//     Character b("Adi" , Point(2,2) , 100);
+
+//     Point loc = a.getLocation();
+
+//     a.move(&b);
+
+//     CHECK(a.getLocation() == (loc + a.move(&b)));
+// }
+
+
+TEST_CASE("Checking slash function"){
+
+    OldNinja a("Matan" , Point(1,1));
+
+    YoungNinja b("Adi" , Point(10,10));
+
+    if(a.distance(&b) < 1){
+
+        CHECK_NOTHROW(a.slash(&b));
+        CHECK(b.getHealth() == 87);
+
+    }
+    else{
+
+        CHECK_THROWS(a.slash(&b));
+    }
+
+}
+
+TEST_CASE("Checking all ninja's health is correct"){
+
+    OldNinja a("Tom"  , Point(2,2));
+
+    CHECK(a.getHealth() == 150);
+
+    TrainedNinja b("Shachar" , Point(5,5));
+
+    CHECK(b.getHealth() == 120);
+
+    YoungNinja c("Ron" , Point(10,10));
+
+    CHECK(c.getHealth() == 100);
+
+}
 
 
 
