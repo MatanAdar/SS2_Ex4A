@@ -15,6 +15,12 @@ TEST_CASE("Checking if point created succsessfully"){
     Point a(2.3,4);
     CHECK(a.getPointX() == 2.3);
     CHECK(a.getPointY() == 4);
+
+    Point b(-1.3,-5);
+    CHECK(b.getPointX() == -1.3);
+    CHECK(b.getPointY() == -5);
+
+
 }
 
 TEST_CASE("Checking distance calculation is correct"){
@@ -65,166 +71,260 @@ TEST_CASE("Checking MoveTowards function"){
 
 }
 
-TEST_CASE("Checking valid input for health object"){
+// TEST_CASE("Checking valid input for health object"){
 
-    //throw error if input negetive health or zero
-    CHECK_THROWS(Character("Hod", Point(1,0) ,-5));
-    CHECK_THROWS(Character("Adi", Point(0,0) , 0));
+//     //throw error if input negetive health or zero
+//     CHECK_THROWS(("Hod", Point(1,0) ,-5));
+//     CHECK_THROWS(Character("Adi", Point(0,0) , 0));
 
 
-}
+// }
 
 
 TEST_CASE("Checking isAlive function"){
 
-    Character a("Matan" , Point(1,1) , 70);
+    Cowboy *a = new Cowboy("Matan" , Point(1,1));
 
-    CHECK(a.isAlive() == true);
+    CHECK(a->isAlive() == true);
 
-    Character b("Roni" , Point(3,4) , 0);
 
-    CHECK(b.isAlive() == false);
+
+    Cowboy *b = new Cowboy("Roni" , Point(3,4));
+
+    //making sure that cowboy will die(will have 0 health)
+    for(int i=0; i<11 ; i++){
+        a->shoot(b);
+    }
+
+    CHECK(b->isAlive() == false);
 }
 
 TEST_CASE("Checking that dead cowboy cant shoot"){
 
-    Cowboy a("Tom" , Point(1,1));
+    Cowboy *a = new Cowboy("Tom" , Point(1,1));
     
+    Cowboy *b = new Cowboy("Ben"  , Point(5,5));
+
+    //making sure that cowboy will die(will have 0 health)
+    for(int i=0;i<11;i++){
+        a->shoot(b);
+    }
+
+    //thorw an error beccause b is dead he cant shot
+    CHECK_THROWS(b->shoot(a));
 }
 
 
 TEST_CASE("Checking Shoot function"){
 
-    Cowboy a("Yoni" , Point(1,1));
+    Cowboy *a = new Cowboy("Yoni" , Point(1,1));
 
-    Character enemy("Hod" , Point(4,4) , 60);
+    YoungNinja *enemy = new YoungNinja("Hod" , Point(4,4));
 
-    Character temp("Shalom" , Point(2,2), 100);
+    OldNinja *temp = new OldNinja("Shalom" , Point(2,2));
 
-    a.shoot(&enemy);
+    a->shoot(enemy);
 
     //checking that enemy lose health
-    CHECK(enemy.getHealth() == 50);
-    CHECK(enemy.isAlive() == true);
+    CHECK(enemy->getHealth() == 90);
+    CHECK(enemy->isAlive() == true);
 
     //using all his bullets
     for(int i=0 ; i<5 ; i++){
-        a.shoot(&enemy);
+        a->shoot(enemy);
+    }
+
+    CHECK(a->hasboolets() == false);
+
+    //try to shoot when dont have any bullets left
+    CHECK_THROWS(a->shoot(temp));
+
+    //checking temp dont lose life because cowboy dont have anymore bullets
+    CHECK(temp->getHealth() == 100);
+
+    //checking after reload we relly have bullets
+    a->reload();
+
+    CHECK(a->hasboolets() == true);
+
+    //keep shooting until enemy dead(0 health)
+    for(int i=0;i<4;i++){
+        a->shoot(enemy);
     }
 
     //checking that enemy lost all his health(dead)
-    CHECK(enemy.getHealth() == 0);
-    CHECK(enemy.isAlive() == false);
-
-    //try to shoot when dont have any bullets left
-    CHECK_THROWS(a.shoot(&temp));
-
-    //checking temp dont lose life because cowboy dont have anymore bullets
-    CHECK(temp.getHealth() == 100);
+    CHECK(enemy->getHealth() == 0);
+    CHECK(enemy->isAlive() == false);
 
 }
 
 
 TEST_CASE("Checking cowboy bullets"){
 
-    Cowboy t("Matan" , Point(10,10));
+    Cowboy *t = new Cowboy("Matan" , Point(10,10));
 
-    Character a("Hod" , Point(5,5) , 120);
+    TrainedNinja *a = new TrainedNinja("Hod" , Point(5,5));
 
     //when created cowboy have 6 bullets so its true
-    CHECK(t.hasboolets() == true );
+    CHECK(t->hasboolets() == true );
 
     //taking 6 shots
     for(int i=0; i<6 ; i++){
-        t.shoot(&a);
+        t->shoot(a);
     }
     
     // need to be false becaue cowboy used all his bullets
-    CHECK(t.hasboolets() == false);
+    CHECK(t->hasboolets() == false);
 
 }
 
 
 TEST_CASE("Checking cowboy relod function"){
 
-    Cowboy t("Matan" , Point(10,10));
+    Cowboy *t = new Cowboy("Matan" , Point(10,10));
 
-    Character a("Hod" , Point(5,5) , 120);
+    Cowboy *a = new Cowboy("Hod" , Point(5,5));
 
     //taking 6 shots
     for(int i=0; i<6 ; i++){
-        t.shoot(&a);
+        t->shoot(a);
     }
     
     // need to be false becaue cowboy used all his bullets
-    CHECK(t.hasboolets() == false);
+    CHECK(t->hasboolets() == false);
 
-    t.reload();
+    t->reload();
 
     //checking after reload that cowboy have bullets
-    CHECK(t.hasboolets() == true);
+    CHECK(t->hasboolets() == true);
+
+    //throw an error if we try to reload when we have already bullets in our pistol
+    CHECK_THROWS(t->reload());
 
 }
 
-// TEST_CASE("Checking adding same char to another team"){
+TEST_CASE("Checking adding same character to another team"){
 
-//     Cowboy a("Matan" , Point(2,2));
+    Cowboy *a = new Cowboy("Matan" , Point(2,2));
 
-//     Team b(&a);
+    Team b(a);
 
-//     CHECK_THROWS(Team(&a));
-// }
+    CHECK_THROWS(Team(a));
+}
 
 
-// TEST_CASE("Checking Move function"){
+TEST_CASE("Checking Move function"){
 
-//     YoungNinja a("Matan" , Point(1,1));
+    YoungNinja *a = new YoungNinja("Matan" , Point(1,1));
 
-//     Character b("Adi" , Point(2,2) , 100);
+    Cowboy *b = new Cowboy("Adi" , Point(2,2));
 
-//     Point loc = a.getLocation();
+    Point location_before_moving = a->getLocation();
 
-//     a.move(&b);
+    a->move(b);
 
-//     CHECK(a.getLocation() == (loc + a.move(&b)));
-// }
+    CHECK(((a->getLocation().getPointX() != location_before_moving.getPointX()) || (a->getLocation().getPointY() != location_before_moving.getPointY())));
+    
+}
 
 
 TEST_CASE("Checking slash function"){
 
-    OldNinja a("Matan" , Point(1,1));
+    OldNinja *a = new OldNinja("Matan" , Point(1,1));
 
-    YoungNinja b("Adi" , Point(10,10));
+    YoungNinja *b = new YoungNinja("Adi" , Point(10,10));
 
-    if(a.distance(&b) < 1){
+    if(a->distance(b) < 1){
 
-        CHECK_NOTHROW(a.slash(&b));
-        CHECK(b.getHealth() == 87);
+        CHECK_NOTHROW(a->slash(b));
+        CHECK(b->getHealth() == 87);
 
     }
     else{
 
-        CHECK_THROWS(a.slash(&b));
+        CHECK_THROWS(a->slash(b));
     }
 
 }
 
 TEST_CASE("Checking all ninja's health is correct"){
 
-    OldNinja a("Tom"  , Point(2,2));
+    OldNinja *a = new OldNinja("Tom"  , Point(2,2));
 
-    CHECK(a.getHealth() == 150);
+    CHECK(a->getHealth() == 150);
 
-    TrainedNinja b("Shachar" , Point(5,5));
+    TrainedNinja *b = new TrainedNinja("Shachar" , Point(5,5));
 
-    CHECK(b.getHealth() == 120);
+    CHECK(b->getHealth() == 120);
 
-    YoungNinja c("Ron" , Point(10,10));
+    YoungNinja *c = new YoungNinja("Ron" , Point(10,10));
 
-    CHECK(c.getHealth() == 100);
+    CHECK(c->getHealth() == 100);
 
 }
 
+
+TEST_CASE("Checking attack function"){
+
+    Cowboy *a = new Cowboy("Tom" , Point(1,1));
+
+    Team team_a(a);
+
+    team_a.add(new Cowboy("Asher" , Point(5,5)));
+
+    TrainedNinja *b = new TrainedNinja("Roy",Point(5.5,5.5));
+
+    Team team_b(b);
+
+    for(int i=0;i<10;i++){
+
+        team_b.attack(&team_a);
+
+    }
+
+    CHECK(a->getHealth() <= 0);
+
+    CHECK(team_a.stillAlive() < 2);
+
+    //checking how to check if the leader change
+    CHECK(team_a.getLeader() != NULL);
+
+
+
+
+
+
+
+
+
+
+
+}
+
+
+TEST_CASE("Checking stillAlive function"){
+
+    Cowboy *a = new Cowboy("Yoni" , Point(2,2));
+
+    Team team_a(a);
+
+    Cowboy *b = new Cowboy("Dani" , Point(5,5));
+
+    Team team_b(b);
+
+    //checking after added, stillAlive is 1
+    CHECK(team_b.stillAlive() == 1);
+
+    //making sure that leader of team b is dead
+    // while(b->getHealth() > 0){
+    //     team_a.attack(&team_b);
+    // }
+
+    //checking that after he dead, stillAlive is 0
+    CHECK(team_b.stillAlive() == 0);
+
+
+}
 
 
 

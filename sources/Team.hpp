@@ -28,6 +28,10 @@ namespace ariel{
 
             Team(Character* leader);
 
+            Character* getLeader(){
+                return team_leader;
+            }
+
             void add(Character* player);
 
             void attack(Team* other_team);

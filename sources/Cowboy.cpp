@@ -1,4 +1,5 @@
 #include "Cowboy.hpp"
+#include <stdexcept>
 
 
 
@@ -14,7 +15,7 @@ namespace ariel{
 
     void Cowboy::shoot(Character* enemy){
 
-
+        // amount_of_bullets--;
     }
 
     bool Cowboy::hasboolets() const{
@@ -24,7 +25,16 @@ namespace ariel{
 
     void Cowboy::reload(){
 
+        if(amount_of_bullets > 0){
+            throw std::runtime_error("cant reload when we still have bullets");
+        }
+
         amount_of_bullets = 6;
+    }
+
+    string Cowboy::print() const{
+
+        return "hii";
     }
 
 

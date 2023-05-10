@@ -16,4 +16,9 @@ namespace ariel{
 
     }
 
+    string Ninja::print() const{
+
+        return "hii";
+    }
+
 }

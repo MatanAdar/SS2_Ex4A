@@ -24,6 +24,7 @@ namespace ariel{
 
             void reload();
 
+            string print() const;
     };
 }
 

@@ -10,6 +10,7 @@ using namespace std;
 
 
 namespace ariel{
+
     class  Character{
         private:
             Point c_location;
@@ -55,7 +56,10 @@ namespace ariel{
             }
             
             //need to check if need the word virtual before ??????????????????????????
-            string print() const;
+            virtual string print() const = 0;
+
+            //virtual destructor
+            virtual ~Character() {}
 
 
     };
