@@ -5,6 +5,7 @@
 #include "Character.hpp"
 #include "Team.hpp"
 
+using namespace ariel;
 
 
 TEST_CASE("Checking if point created succsessfully"){
@@ -47,7 +48,7 @@ TEST_CASE("Checking distance calculation is correct"){
 }
 
 TEST_CASE("Checking print function"){
-
+    
     
 }
 
@@ -71,23 +72,12 @@ TEST_CASE("Checking MoveTowards function"){
 
 }
 
-// TEST_CASE("Checking valid input for health object"){
-
-//     //throw error if input negetive health or zero
-//     CHECK_THROWS(("Hod", Point(1,0) ,-5));
-//     CHECK_THROWS(Character("Adi", Point(0,0) , 0));
-
-
-// }
-
 
 TEST_CASE("Checking isAlive function"){
 
     Cowboy *a = new Cowboy("Matan" , Point(1,1));
 
     CHECK(a->isAlive() == true);
-
-
 
     Cowboy *b = new Cowboy("Roni" , Point(3,4));
 
@@ -112,6 +102,7 @@ TEST_CASE("Checking that dead cowboy cant shoot"){
 
     //thorw an error beccause b is dead he cant shot
     CHECK_THROWS(b->shoot(a));
+
 }
 
 
@@ -325,6 +316,9 @@ TEST_CASE("Checking stillAlive function"){
 
 
 }
+
+
+
 
 
 

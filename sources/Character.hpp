@@ -55,11 +55,16 @@ namespace ariel{
                 checking_in_team = temp;
             }
             
-            //need to check if need the word virtual before ??????????????????????????
             virtual string print() const = 0;
 
             //virtual destructor
-            virtual ~Character() {}
+            virtual ~Character() = default ;
+
+            Character(const Character&) = delete; // delete copy constructor
+            Character& operator=(const Character&) = delete; // delete copy assignment operator
+            Character(Character&&) = delete; // delete move constructor
+            Character& operator=(Character&&) = delete; // delete move assignment operator
+
 
 
     };

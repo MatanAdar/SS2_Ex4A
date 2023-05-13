@@ -24,7 +24,9 @@ namespace ariel{
 
             void reload();
 
-            string print() const;
+            string print() const override;
+
+            //~Cowboy() = default;
     };
 }
 

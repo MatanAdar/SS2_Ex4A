@@ -11,7 +11,11 @@ namespace ariel{
 
         public:
 
-          OldNinja(const string& name, const Point& location);  
+          OldNinja(const string& name, const Point& location);
+
+          string print() const override; 
+
+        //~OldNinja() = default;
 
     };
 }
