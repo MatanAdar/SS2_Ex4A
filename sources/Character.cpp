@@ -24,7 +24,6 @@ namespace ariel{
 
         return c_location.distance(other_c->getLocation());
 
-        // return 2.3;
     }
 
     void Character::hit(int hits){

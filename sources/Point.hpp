@@ -1,9 +1,11 @@
 #ifndef POINT_HPP
 #define POINT_HPP
 
-
-
 #include <stdio.h>
+#include <string>
+
+using namespace std;
+
 namespace ariel{
     class Point{
         private:
@@ -22,7 +24,7 @@ namespace ariel{
 
             double distance(const Point& point) const;
 
-            void print_point() const;
+            string print() const;
 
             Point moveTowards(const Point& destanation, double distance);
 

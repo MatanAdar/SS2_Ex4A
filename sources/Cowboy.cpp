@@ -11,11 +11,19 @@ namespace ariel{
 
     Cowboy::Cowboy(const string& name, const Point& location) : Character(name,location,110) , amount_of_bullets(6){
 
+
     }
 
     void Cowboy::shoot(Character* enemy){
 
-        // amount_of_bullets--;
+        if((this->getHealth() > 0) && (this->hasboolets())){
+
+            //lower health of enemy by 10
+            enemy->setHealth(10);
+
+            //lower amout of bullets by 1
+            this->amount_of_bullets--;
+        }
     }
 
     bool Cowboy::hasboolets() const{
@@ -34,7 +42,11 @@ namespace ariel{
 
     string Cowboy::print() const{
 
-        return "hii";
+        if(this->getHealth() <= 0){
+            return "C (" + this->getName() + ") " + this->getLocation().print();
+        }
+
+        return "C " + this->getName() + " " + std::to_string(this->getHealth()) + " " + this->getLocation().print();
     }
 
 

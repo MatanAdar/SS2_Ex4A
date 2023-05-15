@@ -45,6 +45,10 @@ namespace ariel{
                 return c_health;
             }
 
+            void setHealth(int dmg){
+                c_health -= dmg;
+            }
+
             bool getInTeam() const{
 
                 return checking_in_team;

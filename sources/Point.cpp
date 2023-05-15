@@ -39,16 +39,35 @@ namespace ariel{
 
         return sqrt(pow_x + pow_y);
 
-        // return sqrt((dis_x*dis_x) + (dis_y*dis_y));
     }
 
-    void Point::print_point() const{
+    string Point::print() const{
 
-        cout << "(" << this->getPointX() << "," << this->getPointY() << ")" << endl;
+        return "(" + std::to_string(this->getPointX()) + "," + std::to_string(this->getPointY()) + ")";
     }
 
     Point Point::moveTowards(const Point& destanation, double distance){
 
-        return Point(1.0,1.0);
+        if(distance < 0){
+            throw std::runtime_error("cant give negative distance");
+        }
+        
+        if(distance == 0){
+            return *this;        
+        }
+
+        double distance_this_to_dest = this->distance(destanation);
+
+        if(distance_this_to_dest < distance){
+            return destanation;
+        }
+        else{
+            double ratio = distance / distance_this_to_dest;
+            double new_x = this->getPointX() + (destanation.getPointX() - this->getPointX()) * ratio;
+            double new_y = this->getPointY() + (destanation.getPointY() - this->getPointY()) * ratio;
+
+            return Point(new_x,new_y);
+
+        }
     }
 }

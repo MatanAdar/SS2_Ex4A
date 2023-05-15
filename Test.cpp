@@ -70,6 +70,9 @@ TEST_CASE("Checking MoveTowards function"){
     CHECK(check2.getPointX() == b.getPointX());
     CHECK(check2.getPointY() == b.getPointY());
 
+    //thorw error if distance negative
+    CHECK_THROWS(a.moveTowards(b,-2));
+
 }
 
 
