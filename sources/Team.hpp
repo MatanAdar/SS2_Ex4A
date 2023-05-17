@@ -32,7 +32,7 @@ namespace ariel{
                 return team_leader;
             }
 
-            void add(Character* player);
+            virtual void add(Character* player);
 
             void attack(Team* other_team);
 
@@ -43,7 +43,7 @@ namespace ariel{
             bool checking_player_in_team_already(Character* player);
 
             //destructor
-            ~Team();
+            virtual ~Team();
 
             Team(const Team& other) : team_leader(other.team_leader){
             // Copy the state of the `other` object
