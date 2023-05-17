@@ -42,15 +42,7 @@ namespace ariel{
 
     int Team::stillAlive() const{
         
-        int count = 0;
-        for(size_t i=0; i<team.size(); i++){
-            if(team[i]->isAlive() == true){
-                count++;
-            }
-
-        }
-
-        return count;
+        return 0;
     }
             
     void Team::print() const{
