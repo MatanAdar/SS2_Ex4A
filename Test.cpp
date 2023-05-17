@@ -90,6 +90,10 @@ TEST_CASE("Checking isAlive function"){
     }
 
     CHECK(b->isAlive() == false);
+
+    //free all alloctated memory(for valgrind)
+    delete a;
+    delete b;
 }
 
 TEST_CASE("Checking that dead cowboy cant shoot"){
@@ -105,6 +109,10 @@ TEST_CASE("Checking that dead cowboy cant shoot"){
 
     //thorw an error beccause b is dead he cant shot
     CHECK_THROWS(b->shoot(a));
+
+    //free all alloctated memory(for valgrind)
+    delete a;
+    delete b;
 
 }
 
@@ -150,6 +158,11 @@ TEST_CASE("Checking Shoot function"){
     CHECK(enemy->getHealth() == 0);
     CHECK(enemy->isAlive() == false);
 
+    //free all alloctated memory(for valgrind)
+    delete a;
+    delete enemy;
+    delete temp;
+
 }
 
 
@@ -170,6 +183,10 @@ TEST_CASE("Checking cowboy bullets"){
     // need to be false becaue cowboy used all his bullets
     CHECK(t->hasboolets() == false);
 
+
+    //free all alloctated memory(for valgrind)
+    delete t;
+    delete a;
 }
 
 
@@ -195,6 +212,11 @@ TEST_CASE("Checking cowboy relod function"){
     //throw an error if we try to reload when we have already bullets in our pistol
     CHECK_THROWS(t->reload());
 
+
+    //free all alloctated memory(for valgrind)
+    delete t;
+    delete a;
+
 }
 
 TEST_CASE("Checking adding same character to another team"){
@@ -204,6 +226,7 @@ TEST_CASE("Checking adding same character to another team"){
     Team b(a);
 
     CHECK_THROWS(Team(a));
+
 }
 
 
@@ -219,6 +242,10 @@ TEST_CASE("Checking Move function"){
 
     CHECK(((a->getLocation().getPointX() != location_before_moving.getPointX()) || (a->getLocation().getPointY() != location_before_moving.getPointY())));
     
+
+    //free all allocated memeory
+    delete a;
+    delete b;
 }
 
 
@@ -239,6 +266,11 @@ TEST_CASE("Checking slash function"){
         CHECK_THROWS(a->slash(b));
     }
 
+
+    //free all allocated memeory
+    delete a;
+    delete b;
+
 }
 
 TEST_CASE("Checking all ninja's health is correct"){
@@ -254,6 +286,12 @@ TEST_CASE("Checking all ninja's health is correct"){
     YoungNinja *c = new YoungNinja("Ron" , Point(10,10));
 
     CHECK(c->getHealth() == 100);
+
+
+    //free all allocated memory
+    delete a;
+    delete b;
+    delete c;
 
 }
 
